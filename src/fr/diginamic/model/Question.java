@@ -49,8 +49,10 @@ public class Question {
 	
 	public String toString() {
 		String listeReponse ="\n";
+		int index = 0;
 		for(String rep : propositions) {
-			listeReponse += "\t- "+rep+"\n";
+		    index++;
+			listeReponse += "\t"+index+" - "+rep+"\n";
 		}
 		return this.intitule+listeReponse;
 	}
