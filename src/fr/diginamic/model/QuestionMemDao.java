@@ -1,19 +1,40 @@
 package fr.diginamic.model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class QuestionMemDao implements QuestionDao {
-    public static ArrayList<Question> listeQuestions;
+    public ArrayList<Question> listeQuestions;
 
     public QuestionMemDao(){
-        listeQuestions = this.findAll();
+        listeQuestions = new ArrayList<Question>();
+        this.init();
     }
 
     @Override
     public ArrayList<Question> findAll() {
-        ArrayList<Question> listeQuestions = new ArrayList<Question>();
+        return listeQuestions;
+    }
 
+    @Override
+    public void save(Question question) {
+    	this.listeQuestions.add(question);
+    }
+
+    @Override
+    public void delete(Question question) {
+    	this.listeQuestions.remove(question);
+
+    }
+
+    public ArrayList<Question> getListeQuestions() {
+        return listeQuestions;
+    }
+
+    public void setListeQuestions(ArrayList<Question> listeQuestions) {
+        this.listeQuestions = listeQuestions;
+    }
+    
+    public void init() {
         Question q1 = new Question("Capitale de la France", 4);
         q1.addProposition("Marseille");
         q1.addProposition("Paris");
@@ -35,28 +56,8 @@ public class QuestionMemDao implements QuestionDao {
         q3.addProposition("Tokyo");
         q3.setBonneReponse(4);
 
-        listeQuestions.add(q1);
-        listeQuestions.add(q2);
-        listeQuestions.add(q3);
-
-        return listeQuestions;
-    }
-
-    @Override
-    public void save(Question question) {
-
-    }
-
-    @Override
-    public void delete(Question question) {
-
-    }
-
-    public ArrayList<Question> getListeQuestions() {
-        return listeQuestions;
-    }
-
-    public void setListeQuestions(ArrayList<Question> listeQuestions) {
-        this.listeQuestions = listeQuestions;
+        this.listeQuestions.add(q1);
+        this.listeQuestions.add(q2);
+        this.listeQuestions.add(q3);
     }
 }
