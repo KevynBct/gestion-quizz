@@ -56,6 +56,10 @@ public class Question {
 		this.type = type;
 	}
 	
+	public int getNbPropositions() {
+		return this.propositions.size();
+	}
+	
 	public String toString() {
 		String listeReponse ="\n";
 		int index = 0;

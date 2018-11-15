@@ -3,6 +3,7 @@ package fr.diginamic.console;
 import java.util.Scanner;
 
 import fr.diginamic.exception.AjouterQuestionException;
+import fr.diginamic.exception.ExecuterQuizzException;
 import fr.diginamic.exception.SupprimerQuestionException;
 import fr.diginamic.model.*;
 import fr.diginamic.services.*;
@@ -60,7 +61,11 @@ public class QuizzAdminConsoleApp {
 				break;
 			}
 			case 4 : {
-				new ExecuterQuizzService().executeUC(scanner, questionMemDao);
+				try {
+					new ExecuterQuizzService().executeUC(scanner, questionMemDao);
+				} catch (ExecuterQuizzException e) {
+					System.out.println(e.getMessage());
+				}
 				afficheMenu();
 				break;
 			}
