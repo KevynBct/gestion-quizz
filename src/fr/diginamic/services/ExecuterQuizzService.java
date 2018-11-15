@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import fr.diginamic.model.Question;
 import fr.diginamic.model.QuestionDao;
+import fr.diginamic.model.QuestionMemDao;
+import fr.diginamic.model.TypeQuestion;
 
 public class ExecuterQuizzService extends MenuService {
 
@@ -24,12 +26,16 @@ public class ExecuterQuizzService extends MenuService {
 				System.out.println(index+") "+question.toString()+"\nRéponse : ");
 				if(question.verifierReponse(Integer.parseInt(scanner.nextLine()))){
 					System.out.println("Bonne réponse !\n");
-					score++;
+					if(question.getType() == TypeQuestion.SIMPLE)
+						score++;
+					else
+						score += 2;
+						
 				}else {
 					System.out.println("Mauvaise réponse... La bonne réponse était : "+question.getPropositions().get(question.getBonneReponse()-1)+"\n");
 				}				
 			}
-			System.out.println("Score final : "+score+"/"+listeQuestions.size()+"\n");
+			System.out.println("Score final : "+score+"/"+((QuestionMemDao) questionDao).getMaxPoint()+"\n");
 		}
 	}
 

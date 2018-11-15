@@ -6,6 +6,7 @@ public class Question {
 	private String intitule;
 	private ArrayList<String> propositions;
 	private int bonneReponse;
+	private TypeQuestion type;
 	
 	public Question(String intitule, int nbReponse) {
 		this.intitule = intitule;
@@ -45,6 +46,14 @@ public class Question {
 
 	public void setBonneReponse(int bonneReponse) {
 		this.bonneReponse = bonneReponse;
+	}
+	
+	public TypeQuestion getType() {
+		return type;
+	}
+
+	public void setType(TypeQuestion type) {
+		this.type = type;
 	}
 	
 	public String toString() {

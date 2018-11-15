@@ -1,6 +1,5 @@
 package fr.diginamic.console;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.diginamic.exception.AjouterQuestionException;
