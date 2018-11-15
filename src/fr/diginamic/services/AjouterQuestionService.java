@@ -5,6 +5,7 @@ import java.util.Scanner;
 import fr.diginamic.exception.AjouterQuestionException;
 import fr.diginamic.model.Question;
 import fr.diginamic.model.QuestionDao;
+import fr.diginamic.model.TypeQuestion;
 
 public class AjouterQuestionService extends MenuService {
 
@@ -39,8 +40,20 @@ public class AjouterQuestionService extends MenuService {
 			throw new AjouterQuestionException("Il faut saisir un nombre\n");
 		}
 		if(rep > nbReponse || rep < 1) throw new AjouterQuestionException("La réponse doit être comprise entre 1 et "+nbReponse+" !\n");
-		
 		question.setBonneReponse(rep);
+		
+		System.out.println("Est-ce que c'est une question compte double ?\n\t1 - Oui\n\t2 - Non\n");
+		int type;
+		try{
+			type = Integer.parseInt(scanner.nextLine());
+		}catch(Exception e) {
+			throw new AjouterQuestionException("Il faut saisir un nombre\n");
+		}
+		if(type > 2 || type < 1) throw new AjouterQuestionException("La réponse doit être comprise entre 1 et 2 !\n");
+		if(type == 1)
+			question.setType(TypeQuestion.DOUBLE);
+		else 
+			question.setType(TypeQuestion.SIMPLE);
 
 		questionDao.save(question);
 		System.out.println("La question est ajoutée\n");

@@ -34,6 +34,17 @@ public class QuestionMemDao implements QuestionDao {
         this.listeQuestions = listeQuestions;
     }
     
+    public int getMaxPoint() {
+    	int maxPoint = 0;
+    	for(Question question : this.listeQuestions) {
+    		if(question.getType() == TypeQuestion.DOUBLE)
+    			maxPoint += 2;
+    		else
+    			maxPoint++;
+    	}
+    	return maxPoint;
+    }
+    
     public void init() {
         Question q1 = new Question("Capitale de la France", 4);
         q1.addProposition("Marseille");
@@ -41,6 +52,7 @@ public class QuestionMemDao implements QuestionDao {
         q1.addProposition("Lille");
         q1.addProposition("Nantes");
         q1.setBonneReponse(2);
+        q1.setType(TypeQuestion.SIMPLE);
 
         Question q2 = new Question("Capitale de l'Espagne", 4);
         q2.addProposition("Madrid");
@@ -48,6 +60,7 @@ public class QuestionMemDao implements QuestionDao {
         q2.addProposition("Valence");
         q2.addProposition("Bilbao");
         q2.setBonneReponse(1);
+        q2.setType(TypeQuestion.DOUBLE);
 
         Question q3 = new Question("Capitale du Japon", 4);
         q3.addProposition("Kyoto");
@@ -55,6 +68,7 @@ public class QuestionMemDao implements QuestionDao {
         q3.addProposition("Osaka");
         q3.addProposition("Tokyo");
         q3.setBonneReponse(4);
+        q3.setType(TypeQuestion.SIMPLE);
 
         this.listeQuestions.add(q1);
         this.listeQuestions.add(q2);
