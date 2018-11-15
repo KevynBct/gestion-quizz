@@ -3,6 +3,8 @@ package fr.diginamic.console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import fr.diginamic.exception.AjouterQuestionException;
+import fr.diginamic.exception.SupprimerQuestionException;
 import fr.diginamic.model.*;
 import fr.diginamic.services.*;
 
@@ -27,7 +29,12 @@ public class QuizzAdminConsoleApp {
 				"99. Sortir");
 		
 		Scanner scanner = new Scanner(System.in);
-		int choice = Integer.parseInt(scanner.nextLine());
+		int choice = 0;
+		try {
+			choice = Integer.parseInt(scanner.nextLine());
+		}catch (Exception e) {
+			System.out.println("Saisissez un nombre\n");
+		}
 		
 		switch (choice) {
 			case 1 : {
@@ -36,12 +43,20 @@ public class QuizzAdminConsoleApp {
 				break;
 			}
 			case 2 : {
-				new AjouterQuestionService().executeUC(scanner, questionMemDao);
+				try {
+					new AjouterQuestionService().executeUC(scanner, questionMemDao);
+				} catch (AjouterQuestionException e) {
+					System.out.println(e.getMessage());
+				}
 				afficheMenu();
 				break;
 			}
 			case 3 : {
-				new SupprimerQuestionService().executeUC(scanner, questionMemDao);
+				try {
+					new SupprimerQuestionService().executeUC(scanner, questionMemDao);
+				} catch (SupprimerQuestionException e) {
+					System.out.println(e.getMessage());
+				}
 				afficheMenu();
 				break;
 			}
